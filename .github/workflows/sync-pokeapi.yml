@@ -1,0 +1,18 @@
+name: Sync PokeAPI Fork
+on:
+  schedule:
+    - cron: '0 0 * * *' # Synchronisation automatique tous les jours à minuit
+  workflow_dispatch:    # Permet de lancer la mise à jour manuellement à tout moment
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync Fork
+        uses: XueMoMo/Sync-Fork-action@v1.0.6
+        with:
+          upstream_repository: 'PokeAPI/pokeapi'
+          upstream_branch: 'master'
+          target_branch: 'master'
+          # Force la mise à jour pour correspondre exactement à l'original
+          git_pull_args: '--rebase'
